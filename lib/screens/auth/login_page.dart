@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iparkpatrol_mobile/screens/home_screen.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/button_widget.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
@@ -57,7 +58,10 @@ class _LoginPageState extends State<LoginPage> {
                 color: primary,
                 width: 175,
                 label: 'Login',
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const HomeScreen()));
+                },
               ),
               const SizedBox(
                 height: 50,
