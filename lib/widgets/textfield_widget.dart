@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iparkpatrol_mobile/utlis/colors.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String? hint;
@@ -66,7 +67,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: 'Bold',
-                  color: Colors.amber[800],
+                  color: primary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -103,11 +104,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             style: const TextStyle(
               fontFamily: 'Regular',
               fontSize: 14,
-              color: Colors.white,
+              color: Colors.black,
             ),
             textCapitalization: widget.textCapitalization!,
             keyboardType: widget.inputType,
             decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
               suffixIcon: widget.showEye! == true
                   ? IconButton(
                       onPressed: () {
@@ -116,13 +119,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                         });
                       },
                       icon: widget.isObscure!
-                          ? const Icon(
+                          ? Icon(
                               Icons.visibility,
-                              color: Colors.grey,
+                              color: primary,
                             )
-                          : const Icon(
+                          : Icon(
                               Icons.visibility_off,
-                              color: Colors.grey,
+                              color: primary,
                             ))
                   : const SizedBox(),
               contentPadding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
@@ -138,25 +141,25 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 borderSide: BorderSide(
                   color: widget.borderColor!,
                 ),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(10),
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: widget.borderColor!,
                 ),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(10),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: widget.borderColor!,
                 ),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(10),
               ),
               errorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: Colors.red,
                 ),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(10),
               ),
               errorText: widget.errorText,
               errorStyle: TextStyle(
