@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iparkpatrol_mobile/screens/pages/print_ticket_page.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/button_widget.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
@@ -222,7 +223,10 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   fontSize: 14,
                   color: primary,
                   label: 'Generate Ticket',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const PrintTicketPage()));
+                  },
                 ),
               ),
               const SizedBox(
