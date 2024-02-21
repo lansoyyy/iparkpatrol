@@ -37,7 +37,7 @@ class TextFieldWidget extends StatefulWidget {
       this.height = 50,
       this.maxLine = 1,
       this.hintColor = Colors.white,
-      this.borderColor = Colors.grey,
+      this.borderColor = const Color(0xff0093CB),
       this.showEye = false,
       this.color = Colors.white,
       this.radius = 5,
