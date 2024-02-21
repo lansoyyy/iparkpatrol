@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iparkpatrol_mobile/screens/pages/add_ticket_page.dart';
+import 'package:iparkpatrol_mobile/screens/auth/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: AddTicketPage(),
+      home: LoginPage(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iparkpatrol_mobile/screens/pages/view_notif_page.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 
@@ -68,7 +69,10 @@ class NotifTab extends StatelessWidget {
                           ),
                           const Expanded(child: SizedBox()),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const ViewNotifPage()));
+                            },
                             child: TextWidget(
                               text: 'View',
                               fontSize: 16,
