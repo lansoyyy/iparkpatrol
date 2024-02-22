@@ -3,6 +3,8 @@ import 'package:iparkpatrol_mobile/screens/auth/login_page.dart';
 import 'package:iparkpatrol_mobile/screens/tabs/history_tab.dart';
 import 'package:iparkpatrol_mobile/screens/tabs/home_tab.dart';
 import 'package:iparkpatrol_mobile/screens/tabs/notif_tab.dart';
+import 'package:iparkpatrol_mobile/widgets/drawer_widget.dart';
+import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 
 import '../utlis/colors.dart';
 
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
+        drawer: const DrawerWidget(),
         bottomNavigationBar: Material(
           elevation: 0,
           color: Colors.black,
@@ -83,14 +86,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.menu,
-                        color: primary,
-                        size: 32,
-                      ),
-                    ),
+                    Builder(builder: (context) {
+                      return IconButton(
+                        onPressed: () {
+                          Scaffold.of(context).openDrawer();
+                        },
+                        icon: Icon(
+                          Icons.menu,
+                          color: primary,
+                          size: 32,
+                        ),
+                      );
+                    }),
                     IconButton(
                       onPressed: () {
                         showDialog(
