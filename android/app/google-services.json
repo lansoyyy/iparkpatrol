@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "362008413359",
+    "project_id": "iparkpatrol",
+    "storage_bucket": "iparkpatrol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362008413359:android:4919223c345e9c29ec005a",
+        "android_client_info": {
+          "package_name": "com.example.iparkpatrol_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwCxghmQRFMMvvCxmc1OioAtHACPTdu2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
