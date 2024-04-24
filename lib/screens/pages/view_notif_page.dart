@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iparkpatrol_mobile/screens/pages/add_ticket_page.dart';
+import 'package:iparkpatrol_mobile/screens/pages/input_license_page.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 
@@ -94,7 +95,7 @@ class ViewNotifPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const AddTicketPage()));
+                          builder: (context) => const InputLicensePage()));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

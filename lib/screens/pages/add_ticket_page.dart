@@ -6,7 +6,9 @@ import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 import 'package:iparkpatrol_mobile/widgets/textfield_widget.dart';
 
 class AddTicketPage extends StatefulWidget {
-  const AddTicketPage({super.key});
+  String license;
+
+  AddTicketPage({super.key, required this.license});
 
   @override
   State<AddTicketPage> createState() => _AddTicketPageState();
@@ -29,6 +31,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
   final marking = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    licensenumber.text = widget.license;
     return Scaffold(
       backgroundColor: background,
       body: Padding(
@@ -109,6 +112,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                 height: 10,
               ),
               TextFieldWidget(
+                isEnabled: false,
                 controller: licensenumber,
                 label: 'License Number',
               ),
@@ -225,7 +229,21 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   label: 'Generate Ticket',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const PrintTicketPage()));
+                        builder: (context) => PrintTicketPage(
+                            name: name.text,
+                            address: address.text,
+                            gender: gender.text,
+                            license: widget.license,
+                            expiry: expiry.text,
+                            nationality: nationality.text,
+                            color: color.text,
+                            height: height.text,
+                            maker: maker.text,
+                            marking: marking.text,
+                            model: model.text,
+                            plateno: platenumber.text,
+                            restriction: restriction.text,
+                            weight: weight.text)));
                   },
                 ),
               ),

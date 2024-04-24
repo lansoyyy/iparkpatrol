@@ -1,10 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 
-class PrintTicketPage extends StatelessWidget {
-  const PrintTicketPage({super.key});
+class PrintTicketPage extends StatefulWidget {
+  String name;
+  String address;
+  String gender;
+  String license;
+  String expiry;
+  String nationality;
+  String height;
+  String weight;
+  String restriction;
+  String plateno;
+  String maker;
+  String color;
+  String model;
+  String marking;
 
+  PrintTicketPage(
+      {super.key,
+      required this.name,
+      required this.address,
+      required this.gender,
+      required this.license,
+      required this.expiry,
+      required this.nationality,
+      required this.color,
+      required this.height,
+      required this.maker,
+      required this.marking,
+      required this.model,
+      required this.plateno,
+      required this.restriction,
+      required this.weight});
+
+  @override
+  State<PrintTicketPage> createState() => _PrintTicketPageState();
+}
+
+class _PrintTicketPageState extends State<PrintTicketPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +93,8 @@ class PrintTicketPage extends StatelessWidget {
                         height: 20,
                       ),
                       TextWidget(
-                        text: 'Date: January 5, 2024',
+                        text:
+                            'Date: ${DateFormat("MMMM d, yyyy").format(DateTime.now())}',
                         fontSize: 12,
                         color: Colors.black,
                         fontFamily: 'Medium',
@@ -66,7 +103,8 @@ class PrintTicketPage extends StatelessWidget {
                         height: 5,
                       ),
                       TextWidget(
-                        text: 'Time: 12:00 P.M.',
+                        text:
+                            'Time: ${DateFormat("h:mm a").format(DateTime.now())}',
                         fontSize: 12,
                         color: Colors.black,
                         fontFamily: 'Medium',
@@ -75,7 +113,8 @@ class PrintTicketPage extends StatelessWidget {
                         height: 5,
                       ),
                       TextWidget(
-                        text: 'Citation Ticket Number: 2024-01-001',
+                        text:
+                            'Citation Ticket Number: ${DateTime.now().year}-${DateTime.now().month}-001',
                         fontSize: 12,
                         color: Colors.black,
                         fontFamily: 'Medium',
@@ -83,59 +122,59 @@ class PrintTicketPage extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      rowData('Name', 'Sample data'),
+                      rowData('Name', widget.name),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Address', 'Sample data'),
+                      rowData('Address', widget.address),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Gender', 'Sample data'),
+                      rowData('Gender', widget.gender),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Drivers License Number', 'Sample data'),
+                      rowData('Drivers License Number', widget.license),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Expiry', 'Sample data'),
+                      rowData('Expiry', widget.expiry),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Nationality', 'Sample data'),
+                      rowData('Nationality', widget.nationality),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Height', 'Sample data'),
+                      rowData('Height', widget.height),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Weight', 'Sample data'),
+                      rowData('Weight', widget.weight),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Restriction', 'Sample data'),
+                      rowData('Restriction', widget.restriction),
                       const SizedBox(
                         height: 20,
                       ),
-                      rowData('Plate No.', 'Sample data'),
+                      rowData('Plate No.', widget.plateno),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Maker', 'Sample data'),
+                      rowData('Maker', widget.maker),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Color', 'Sample data'),
+                      rowData('Color', widget.color),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Model', 'Sample data'),
+                      rowData('Model', widget.model),
                       const SizedBox(
                         height: 5,
                       ),
-                      rowData('Marking', 'Sample data'),
+                      rowData('Marking', widget.marking),
                       const SizedBox(
                         height: 20,
                       ),
