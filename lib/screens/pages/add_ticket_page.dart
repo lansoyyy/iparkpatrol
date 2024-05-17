@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:iparkpatrol_mobile/screens/pages/print_ticket_page.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/button_widget.dart';
+import 'package:iparkpatrol_mobile/widgets/new_textfield_widget.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 import 'package:iparkpatrol_mobile/widgets/textfield_widget.dart';
 
@@ -17,18 +19,23 @@ class AddTicketPage extends StatefulWidget {
 class _AddTicketPageState extends State<AddTicketPage> {
   final name = TextEditingController();
   final address = TextEditingController();
-  final gender = TextEditingController();
+
   final nationality = TextEditingController();
   final licensenumber = TextEditingController();
-  final expiry = TextEditingController();
+
   final restriction = TextEditingController();
   final height = TextEditingController();
   final weight = TextEditingController();
   final platenumber = TextEditingController();
-  final maker = TextEditingController();
+
+  final expiry = TextEditingController();
+
   final color = TextEditingController();
   final model = TextEditingController();
   final marking = TextEditingController();
+
+  String genderSelected = 'Male';
+  String makerSelected = 'Toyota';
   @override
   Widget build(BuildContext context) {
     licensenumber.text = widget.license;
@@ -93,10 +100,72 @@ class _AddTicketPageState extends State<AddTicketPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFieldWidget(
-                    width: 150,
-                    controller: gender,
-                    label: 'Gender',
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Gender',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Bold',
+                                color: primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const TextSpan(
+                              text: '*',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Bold',
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: const Color(0xff0093CB),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: DropdownButton<String>(
+                            underline: const SizedBox(),
+                            value: genderSelected,
+                            hint: const Text('Select gender'),
+                            items:
+                                <String>['Male', 'Female'].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: TextStyle(
+                                      fontFamily: 'Bold', color: primary),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                genderSelected = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     width: 20,
@@ -122,10 +191,103 @@ class _AddTicketPageState extends State<AddTicketPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFieldWidget(
-                    width: 150,
-                    controller: expiry,
-                    label: 'Expiry',
+                  Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Expiry',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'Bold',
+                                  color: primary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: '*',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'Bold',
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            dateFromPicker(context);
+                          },
+                          child: SizedBox(
+                            width: 150,
+                            height: 50,
+                            child: TextFormField(
+                              enabled: false,
+                              style: TextStyle(
+                                fontFamily: 'Regular',
+                                fontSize: 14,
+                                color: primary,
+                              ),
+
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                hintStyle: const TextStyle(
+                                  fontFamily: 'Regular',
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                                hintText: expiry.text,
+                                border: InputBorder.none,
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: primary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: primary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: primary,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.red,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                errorStyle: const TextStyle(
+                                    fontFamily: 'Bold', fontSize: 12),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.red,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+
+                              controller: expiry,
+                              // Pass the validator to the TextFormField
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     width: 20,
@@ -143,7 +305,8 @@ class _AddTicketPageState extends State<AddTicketPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFieldWidget(
+                  NewTextFieldWidget(
+                    suffix: 'cm',
                     width: 150,
                     controller: height,
                     label: 'Height',
@@ -151,7 +314,8 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   const SizedBox(
                     width: 20,
                   ),
-                  TextFieldWidget(
+                  NewTextFieldWidget(
+                    suffix: 'kg',
                     width: 150,
                     controller: weight,
                     label: 'Weight',
@@ -180,10 +344,94 @@ class _AddTicketPageState extends State<AddTicketPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextFieldWidget(
-                    width: 150,
-                    controller: maker,
-                    label: 'Maker',
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Maker',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Bold',
+                                color: primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const TextSpan(
+                              text: '*',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'Bold',
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            color: const Color(0xff0093CB),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: DropdownButton<String>(
+                            underline: const SizedBox(),
+                            value: makerSelected,
+                            hint: const Text('Select maker'),
+                            items: <String>[
+                              'Toyota',
+                              'Honda',
+                              'Ford',
+                              'Chevrolet',
+                              'Nissan',
+                              'BMW',
+                              'Mercedes-Benz',
+                              'Volkswagen',
+                              'Audi',
+                              'Hyundai',
+                              'Kia',
+                              'Mazda',
+                              'Subaru',
+                              'Tesla',
+                              'Lexus',
+                              'Jaguar',
+                              'Land Rover',
+                              'Porsche',
+                              'Ferrari',
+                              'Lamborghini'
+                            ].map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'Bold',
+                                      color: primary),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                makerSelected = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     width: 20,
@@ -232,13 +480,13 @@ class _AddTicketPageState extends State<AddTicketPage> {
                         builder: (context) => PrintTicketPage(
                             name: name.text,
                             address: address.text,
-                            gender: gender.text,
+                            gender: genderSelected,
                             license: widget.license,
                             expiry: expiry.text,
                             nationality: nationality.text,
                             color: color.text,
                             height: height.text,
-                            maker: maker.text,
+                            maker: makerSelected,
                             marking: marking.text,
                             model: model.text,
                             plateno: platenumber.text,
@@ -255,5 +503,35 @@ class _AddTicketPageState extends State<AddTicketPage> {
         ),
       ),
     );
+  }
+
+  void dateFromPicker(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: primary,
+                onPrimary: Colors.white,
+                onSurface: Colors.grey,
+              ),
+            ),
+            child: child!,
+          );
+        },
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2050));
+
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+
+      setState(() {
+        expiry.text = formattedDate;
+      });
+    } else {
+      return null;
+    }
   }
 }

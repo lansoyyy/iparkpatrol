@@ -46,10 +46,9 @@ class DrawerWidget extends StatelessWidget {
                             shape: BoxShape.circle,
                             color: Colors.white),
                         child: Padding(
-                          padding: const EdgeInsets.all(2.5),
-                          child: Image.asset(
-                            'assets/images/RTA logo 1.png',
-                            height: 35,
+                          padding: EdgeInsets.all(2.5),
+                          child: Image.network(
+                            data['img'],
                           ),
                         ),
                       ),
