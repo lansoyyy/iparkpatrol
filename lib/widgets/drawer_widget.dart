@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:iparkpatrol_mobile/screens/pages/about_page.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 
 import '../screens/home_screen.dart';
@@ -41,16 +42,14 @@ class DrawerWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
+                        height: 50,
+                        width: 50,
                         decoration: BoxDecoration(
                             border: Border.all(color: primary),
                             shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(data['img'])),
                             color: Colors.white),
-                        child: Padding(
-                          padding: EdgeInsets.all(2.5),
-                          child: Image.network(
-                            data['img'],
-                          ),
-                        ),
                       ),
                       TextWidget(
                         text: '${data['fname']} ${data['lname']}',
@@ -76,16 +75,9 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   ListTile(
                     onTap: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const AboutPage()));
                     },
-                    title: TextWidget(
-                      text: 'Help',
-                      fontSize: 14,
-                      fontFamily: 'Bold',
-                    ),
-                  ),
-                  ListTile(
                     title: TextWidget(
                       text: 'About iParkPatrol',
                       fontSize: 14,
