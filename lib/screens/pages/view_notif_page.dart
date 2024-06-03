@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:iparkpatrol_mobile/screens/pages/add_ticket_page.dart';
 import 'package:iparkpatrol_mobile/screens/pages/input_license_page.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 
 class ViewNotifPage extends StatelessWidget {
-  const ViewNotifPage({super.key});
+  dynamic data;
+
+  ViewNotifPage({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +56,16 @@ class ViewNotifPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
-                        child: Container(
-                          height: 150,
-                          width: 250,
-                          decoration: const BoxDecoration(color: Colors.white),
+                        child: Image.network(
+                          data['image_url'],
                         ),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
                       TextWidget(
-                        text: 'Time: 10:00 A.M.',
+                        text:
+                            'Time: ${DateFormat('hh:mm a').format(DateTime.parse(data.id.split('_')[0]))}',
                         fontSize: 12,
                         color: Colors.white,
                         fontFamily: 'Medium',
@@ -68,7 +74,8 @@ class ViewNotifPage extends StatelessWidget {
                         height: 5,
                       ),
                       TextWidget(
-                        text: 'Date: January 25, 2024',
+                        text:
+                            'Date: ${DateFormat('MMMM dd, yyyy').format(DateTime.parse(data.id.split('_')[0]))}',
                         fontSize: 12,
                         color: Colors.white,
                         fontFamily: 'Medium',
@@ -77,7 +84,8 @@ class ViewNotifPage extends StatelessWidget {
                         height: 5,
                       ),
                       TextWidget(
-                        text: 'Location: Divisoria No Parking Space',
+                        text:
+                            'Location: ${data['location']} - ${data['title_of_violation']}',
                         fontSize: 12,
                         color: Colors.white,
                         fontFamily: 'Medium',
@@ -95,7 +103,9 @@ class ViewNotifPage extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const InputLicensePage()));
+                          builder: (context) => InputLicensePage(
+                                data: data,
+                              )));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -130,7 +140,11 @@ class ViewNotifPage extends StatelessWidget {
                     width: 50,
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      await FirebaseFirestore.instance
+                          .collection('illegal_parking')
+                          .doc(data.id)
+                          .update({'status': 'Rejected'});
                       Navigator.pop(context);
                     },
                     child: Column(

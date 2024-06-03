@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:iparkpatrol_mobile/screens/pages/print_ticket_page.dart';
@@ -10,7 +11,9 @@ import 'package:iparkpatrol_mobile/widgets/textfield_widget.dart';
 class AddTicketPage extends StatefulWidget {
   String license;
 
-  AddTicketPage({super.key, required this.license});
+  dynamic data;
+
+  AddTicketPage({super.key, required this.data, required this.license});
 
   @override
   State<AddTicketPage> createState() => _AddTicketPageState();
@@ -475,7 +478,27 @@ class _AddTicketPageState extends State<AddTicketPage> {
                   fontSize: 14,
                   color: primary,
                   label: 'Generate Ticket',
-                  onPressed: () {
+                  onPressed: () async {
+                    await FirebaseFirestore.instance
+                        .collection('illegal_parking')
+                        .doc(widget.data.id)
+                        .update({
+                      'status': 'Resolved',
+                      'name': name.text,
+                      'address': address.text,
+                      'gender': genderSelected,
+                      'license': widget.license,
+                      'expiry': expiry.text,
+                      'nationality': nationality.text,
+                      'color': color.text,
+                      'height': height.text,
+                      'make': makerSelected,
+                      'marking': marking.text,
+                      'model': model.text,
+                      'plateno': platenumber.text,
+                      'restriction': restriction.text,
+                      'weight': weight.text
+                    });
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => PrintTicketPage(
                             name: name.text,

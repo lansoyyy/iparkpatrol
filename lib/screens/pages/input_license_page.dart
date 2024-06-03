@@ -7,7 +7,12 @@ import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 import 'package:iparkpatrol_mobile/widgets/textfield_widget.dart';
 
 class InputLicensePage extends StatefulWidget {
-  const InputLicensePage({super.key});
+  dynamic data;
+
+  InputLicensePage({
+    super.key,
+    required this.data,
+  });
 
   @override
   State<InputLicensePage> createState() => _InputLicensePageState();
@@ -71,6 +76,7 @@ class _InputLicensePageState extends State<InputLicensePage> {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => AddTicketPage(
+                              data: widget.data,
                               license: licensenumber.text,
                             )));
                   },
