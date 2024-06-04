@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:iparkpatrol_mobile/screens/home_screen.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
+import 'package:printing/printing.dart';
+import 'package:printing/printing.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf/pdf.dart';
 
 class PrintTicketPage extends StatefulWidget {
   String name;
@@ -232,7 +237,11 @@ class _PrintTicketPageState extends State<PrintTicketPage> {
                   decoration: BoxDecoration(
                       color: primary, borderRadius: BorderRadius.circular(7.5)),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const HomeScreen()));
+                      _printTicket();
+                    },
                     icon: const Icon(
                       Icons.print,
                       color: Colors.white,
@@ -273,5 +282,48 @@ class _PrintTicketPageState extends State<PrintTicketPage> {
         ),
       ],
     );
+  }
+
+  Future<void> _printTicket() async {
+    final pdf = pw.Document();
+
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.roll57,
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text('Illegal Parking Citation Ticket',
+                  style: pw.TextStyle(
+                      fontSize: 24, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 20),
+              pw.Text(
+                  'Date: ${DateFormat("MMMM d, yyyy").format(DateTime.now())}'),
+              pw.Text('Time: ${DateFormat("h:mm a").format(DateTime.now())}'),
+              pw.Text(
+                  'Citation Ticket Number: ${DateTime.now().year}-${DateTime.now().month}-001'),
+              pw.Text('Name: ${widget.name}'),
+              pw.Text('Address: ${widget.address}'),
+              pw.Text('Gender: ${widget.gender}'),
+              pw.Text('License Number: ${widget.license}'),
+              pw.Text('Expiry: ${widget.expiry}'),
+              pw.Text('Nationality: ${widget.nationality}'),
+              pw.Text('Height: ${widget.height}'),
+              pw.Text('Weight: ${widget.weight}'),
+              pw.Text('Restriction: ${widget.restriction}'),
+              pw.Text('Plate No.: ${widget.plateno}'),
+              pw.Text('Make: ${widget.maker}'),
+              pw.Text('Color: ${widget.color}'),
+              pw.Text('Model: ${widget.model}'),
+              pw.Text('Marking: ${widget.marking}'),
+            ],
+          );
+        },
+      ),
+    );
+
+    await Printing.layoutPdf(
+        onLayout: (PdfPageFormat format) async => pdf.save());
   }
 }
