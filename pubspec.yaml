@@ -42,6 +42,7 @@ dependencies:
   fluttertoast:
   get_storage:
   intl:
+  printing: ^5.9.3
 
 dev_dependencies:
   flutter_test:

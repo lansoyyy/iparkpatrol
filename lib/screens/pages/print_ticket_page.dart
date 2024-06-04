@@ -178,30 +178,30 @@ class _PrintTicketPageState extends State<PrintTicketPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TextWidget(
-                              decoration: TextDecoration.underline,
-                              text: 'Mark Lister Nalupa',
-                              fontSize: 14,
-                              color: Colors.black,
-                            ),
-                            TextWidget(
-                              text: 'Traffic Enforcer on Case',
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontFamily: 'Bold',
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      // Align(
+                      //   alignment: Alignment.bottomRight,
+                      //   child: Column(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: [
+                      //       TextWidget(
+                      //         decoration: TextDecoration.underline,
+                      //         text: 'Mark Lister Nalupa',
+                      //         fontSize: 14,
+                      //         color: Colors.black,
+                      //       ),
+                      //       TextWidget(
+                      //         text: 'Traffic Enforcer on Case',
+                      //         fontSize: 14,
+                      //         color: Colors.black,
+                      //         fontFamily: 'Bold',
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // const SizedBox(
+                      //   height: 10,
+                      // ),
                       Align(
                         alignment: Alignment.bottomLeft,
                         child: Row(
