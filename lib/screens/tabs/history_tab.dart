@@ -131,6 +131,44 @@ class HistoryTab extends StatelessWidget {
                                               color: Colors.white,
                                               fontFamily: 'Medium',
                                             ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            StreamBuilder<DocumentSnapshot>(
+                                                stream: FirebaseFirestore
+                                                    .instance
+                                                    .collection('Enforcers')
+                                                    .doc(data.docs[index]
+                                                        ['enforcerId'])
+                                                    .snapshots(),
+                                                builder: (context,
+                                                    AsyncSnapshot<
+                                                            DocumentSnapshot>
+                                                        snapshot) {
+                                                  if (!snapshot.hasData) {
+                                                    return const Center(
+                                                        child: Text('Loading'));
+                                                  } else if (snapshot
+                                                      .hasError) {
+                                                    return const Center(
+                                                        child: Text(
+                                                            'Something went wrong'));
+                                                  } else if (snapshot
+                                                          .connectionState ==
+                                                      ConnectionState.waiting) {
+                                                    return const Center(
+                                                        child:
+                                                            CircularProgressIndicator());
+                                                  }
+                                                  dynamic data = snapshot.data;
+                                                  return TextWidget(
+                                                    text:
+                                                        'Enforcer: ${data['name']}',
+                                                    fontSize: 12,
+                                                    color: Colors.white,
+                                                    fontFamily: 'Medium',
+                                                  );
+                                                }),
                                           ],
                                         ),
                                         const Expanded(child: SizedBox()),

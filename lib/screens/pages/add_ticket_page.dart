@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:iparkpatrol_mobile/screens/pages/print_ticket_page.dart';
@@ -483,6 +484,7 @@ class _AddTicketPageState extends State<AddTicketPage> {
                         .collection('illegal_parking')
                         .doc(widget.data.id)
                         .update({
+                      'enforcerId': FirebaseAuth.instance.currentUser!.uid,
                       'status': 'Resolved',
                       'name': name.text,
                       'address': address.text,
