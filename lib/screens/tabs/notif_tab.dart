@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,8 +6,39 @@ import 'package:iparkpatrol_mobile/screens/pages/view_notif_page.dart';
 import 'package:iparkpatrol_mobile/utlis/colors.dart';
 import 'package:iparkpatrol_mobile/widgets/text_widget.dart';
 
-class NotifTab extends StatelessWidget {
+class NotifTab extends StatefulWidget {
   const NotifTab({super.key});
+
+  @override
+  State<NotifTab> createState() => _NotifTabState();
+}
+
+class _NotifTabState extends State<NotifTab> {
+  late AudioPlayer player = AudioPlayer();
+
+  playAudio() async {
+    player.setVolume(1);
+    player.setReleaseMode(ReleaseMode.loop);
+
+    await player.setSource(
+      AssetSource(
+        'images/notif.mp3',
+      ),
+    );
+
+    await player.resume();
+  }
+
+  pauseAudio() async {
+    await player.stop();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    player.stop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +81,12 @@ class NotifTab extends StatelessWidget {
                 }
 
                 final data = snapshot.requireData;
+                if (data.docs.isNotEmpty) {
+                  playAudio();
+                  // Audio here
+                } else {
+                  pauseAudio();
+                }
                 return SizedBox(
                   height: 475,
                   width: double.infinity,
